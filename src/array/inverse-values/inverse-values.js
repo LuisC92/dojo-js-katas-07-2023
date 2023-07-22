@@ -16,4 +16,16 @@ Don't mutate the parameter.
 
 // TODO add your code here
 
+// function `inverse` (given an array of numbers)
+const inverse = (array) => {
+    // If the argument is an empty array or null, return an empty array.
+    if(array === null || !Array.isArray(array) || array.length === 0) return []
+    
+    // return the additive inverse of each 
+        // (each positive becomes negatives, and the negatives become positives.)
+        // return array.map(number => number *= -1)
+        return array.map(number => -number)
+
+}
+
 module.exports = inverse;

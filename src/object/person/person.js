@@ -9,6 +9,26 @@ Create a class `Person` which has :
 
 // TODO add your code here
 
+
+class Person{
+  constructor(name, age, weeaboo){
+    this.name = name;
+    this.age = age;
+    this.weeaboo = weeaboo;
+  }
+  introduce(){
+    return `My name is ${this.name} and I am ${this.age}`
+  }
+  greets(name){
+    return !this.weeaboo ? `Hello ${name}` : `Ohayo ${name}-chan`
+  }
+  match(person) {
+    return this.weeaboo === person.weeaboo;
+  }
+}
+
+
+
 // Begin of tests
 const assert = require("assert");
 assert.strictEqual(typeof Person, "function", "Person class is undefined");
@@ -64,5 +84,26 @@ if (typeof Person === "function") {
     );
   }
 }
+
+assert.strictEqual(typeof Person, "function");
+
+const person = new Person("John", 25, false);
+assert.strictEqual(person.name, "John");
+assert.strictEqual(person.age, 25);
+assert.strictEqual(person.weeaboo, false);
+
+assert.strictEqual(person.introduce(), "My name is John and I am 25");
+
+assert.strictEqual(person.greets("Alice"), "Hello Alice");
+
+const personWeeaboo = new Person("Alice", 30, true);
+assert.strictEqual(personWeeaboo.greets("Bob"), "Ohayo Bob-chan");
+
+assert.strictEqual(person.match(personWeeaboo), false);
+
+const personWeeaboo2 = new Person("Alex", 28, true);
+assert.strictEqual(personWeeaboo.match(personWeeaboo2), true);
+
+console.log("All tests passed!");
 
 // End of tests

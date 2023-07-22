@@ -16,6 +16,10 @@ test("inverse null", () => {
   expect(inverse(null)).toStrictEqual([]);
 });
 
+test("inverse with invalid input", () => {
+  expect(inverse("invalid")).toEqual([]);
+});
+
 test("inverse one value", () => {
   expect(inverse([1])).toStrictEqual([-1]);
   expect(inverse([-1])).toStrictEqual([1]);

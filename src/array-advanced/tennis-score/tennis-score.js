@@ -30,11 +30,74 @@ Add you own tests.
 
 // TODO add your code here
 
+const getScore = (points) => {
+    
+    if (!Array.isArray(points) || points.some((point) => typeof point !== "number")) {
+      throw new TypeError("Illegal argument");
+    }
+  
+    const playerScores = [0, 0];
+  
+    for (const point of points) {
+      if (point === 1) {
+        playerScores[0]++;
+      } else if (point === 2) {
+        playerScores[1]++;
+      } else {
+        throw new RangeError("Illegal argument");
+      }
+    }
+  
+    const scoreNames = ["love", "15", "30", "40"];
+    let result = `${scoreNames[playerScores[0]]}-${scoreNames[playerScores[1]]}`;
+  
+    if (playerScores[0] >= 3 && playerScores[1] >= 3) {
+      if (playerScores[0] === playerScores[1]) {
+        result = "deuce";
+      } else if (Math.abs(playerScores[0] - playerScores[1]) === 1) {
+        const leadingPlayer = playerScores[0] > playerScores[1] ? "in" : "out";
+        result = `ad ${leadingPlayer}`;
+      }
+    }
+  
+    return result;
+  };  
+
+
 // Begin of tests
 const assert = require("assert");
 
-assert.strictEqual(typeof getScore, "function");
-assert.strictEqual(getScore.length, 1);
 // TODO add your tests:
+try {    
+    assert.strictEqual(typeof getScore, "function");
+    console.log("getScore function exists");
+  
+    assert.strictEqual(getScore([1, 1, 1]), "40-love");
+    console.log("getScore with [1, 1, 1] returns '40-love'");
+  
+    assert.strictEqual(getScore([2, 1, 2, 2]), "15-40");
+    console.log("getScore with [2, 1, 2, 2] returns '15-40'");
+  
+    assert.strictEqual(getScore([1, 2, 1, 2, 1, 2]), "deuce");
+    console.log("getScore with [1, 2, 1, 2, 1, 2] returns 'deuce'");
+  
+    assert.strictEqual(getScore([1, 1, 1, 2, 2, 2, 1]), "ad in");
+    console.log("getScore with [1, 1, 1, 2, 2, 2, 1] returns 'ad in'");
+  
+    assert.throws(() => getScore(null), TypeError);
+    console.log("getScore with null argument throws TypeError");
+  
+    assert.throws(() => getScore("invalid"), TypeError);
+    console.log("getScore with non-array argument throws TypeError");
+  
+    assert.throws(() => getScore([1, 2, null, 1]), TypeError);
+    console.log("getScore with non-number value in array throws TypeError");
+  
+    assert.throws(() => getScore([1, 2, 3, 1]), RangeError);
+    console.log("getScore with value other than 1 or 2 in array throws RangeError");
+  } catch (error) {
+    console.error("Test failed:", error.message);
+  }
+
 
 // End of tests

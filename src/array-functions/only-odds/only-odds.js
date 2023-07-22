@@ -8,9 +8,14 @@ Don't mutate the parameter.
 */
 
 // TODO add your code here
+
 function odd(arr) {
+
   return arr.filter((num) => num % 2 !== 0);
+  
 }
+
+
 // Begin of tests
 const assert = require("assert");
 

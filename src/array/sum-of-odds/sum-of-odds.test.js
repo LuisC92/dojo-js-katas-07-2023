@@ -27,3 +27,16 @@ test("sum multiple values", () => {
   expect(sum([1, 2, 3])).toBe(4);
   expect(sum([-3, 3])).toBe(0);
 });
+
+//* add more tests
+test("sum with array [2, 4, 6]", () => {
+  expect(sum([2, 4, 6])).toBe(0);
+});
+
+test("sum with array [1, 3, 5]", () => {
+  expect(sum([1, 3, 5])).toBe(9);
+});
+
+test("sum with invalid input", () => {
+  expect(sum("invalid")).toBe(0);
+});

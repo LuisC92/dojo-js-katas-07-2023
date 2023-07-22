@@ -16,6 +16,28 @@ If a value of the argument is not 1 or 2, return "Illegal argument".
 */
 // TODO add your code here
 
+const getScore = (points) =>{
+    if(points  === null) return "Illegal argument"
+
+    const scores = points.reduce((acc, point) => {
+        // if (point === 1) {
+        //   acc.team1++;
+        // } else if (point === 2) {
+        //   acc.team2++;
+        // } else {
+        //   acc.invalid = true;
+        // }
+        point === 1 ?  acc.team1++ : point === 2 ? acc.team2++ :  acc.invalid = true;
+        return acc;
+      }, { team1: 0, team2: 0, invalid: false });
+
+      if(scores.invalid) return "Illegal argument"
+
+      const { team1, team2 } = scores;
+
+      return team1 === team2 ? `${team1}-${team2} : draw` : team1 > team2 ? `${team1}-${team2} : team 1 wins the game` : `${team1}-${team2} : team 2 wins the game`
+}
+
 // Begin of tests
 const assert = require("assert");
 assert.strictEqual(typeof getScore, "function");

@@ -19,11 +19,53 @@ Add you own tests.
 
 // TODO add your code here
 
+const cipher = (word, shift) => {
+  if (typeof word !== "string" || shift === null || typeof shift !== "number") {
+    throw new TypeError("Both word and shift must be valid inputs.");
+  }
+
+  if (word === "") {
+    return "";
+  }
+
+  const alphabet = "abcdefghijklmnopqrstuvwxyz";
+  const length = alphabet.length;
+
+  return word
+    .split("")
+    .map((char) => {
+      if (!char.match(/[a-z]/)) {
+        return char;
+      }
+
+      const index = (alphabet.indexOf(char) + shift + length) % length;
+      return alphabet[index];
+    })
+    .join("");
+};
+
 // Begin of tests
 const assert = require("assert");
 
-assert.strictEqual(typeof cipher, "function");
-assert.strictEqual(cipher.length, 2);
 // TODO add your tests:
+try {
+  assert.strictEqual(typeof cipher, "function");
+  assert.strictEqual(cipher.length, 2);
+  assert.strictEqual(cipher("abcd", 1), "bcde");
+  assert.strictEqual(cipher("abcd", -1), "zabc");
+  assert.strictEqual(cipher("tacos", 3), "wdfrv");
+  assert.strictEqual(cipher("zebra", 2), "bgdtc");
+  assert.strictEqual(cipher("hello", 5), "mjqqt");
+  assert.strictEqual(cipher("world", -3), "tloia");
+  assert.strictEqual(cipher("", 10), "");
+  assert.strictEqual(cipher("123", 2), "123");
+
+  assert.throws(() => cipher(null, 1), TypeError);
+  assert.throws(() => cipher("test", "abc"), TypeError);
+  
+  console.log("All tests passed!");
+} catch (error) {
+  console.error("Test failed:", error.message);
+}
 
 // End of tests

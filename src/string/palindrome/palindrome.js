@@ -18,5 +18,15 @@ Add you own tests.
 */
 
 // TODO add your code here
-
+function isPalindrome(word) {
+    if (word === null || typeof word !== 'string') {
+      return true;
+    }
+  
+    const cleanedWord = word.toLowerCase().replace(/[^a-z]/g, '');
+    const reversedWord = cleanedWord.split('').reverse().join('');
+  
+    return cleanedWord === reversedWord;
+  }
+  
 module.exports = isPalindrome;

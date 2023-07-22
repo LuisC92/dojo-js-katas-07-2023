@@ -32,6 +32,69 @@ result : 2
 
 // TODO add your code here
 
+function isValidGrid(grid) {
+  if (!Array.isArray(grid)) return false;
+  if (grid.length === 0) return false;
+
+  const width = grid[0].length;
+  for (const row of grid) {
+    if (!Array.isArray(row) || row.length !== width) {
+      return false;
+    }
+    for (const cell of row) {
+      if (typeof cell !== 'number' || (cell !== 0 && cell !== 1)) {
+        return false;
+      }
+    }
+  }
+
+  return true;
+}
+
+function sweep(grid, row, column) {
+  if (grid === null || !isValidGrid(grid)) {
+    throw new TypeError('grid must be a non-empty array of arrays containing only 0 or 1');
+  }
+
+  const height = grid.length;
+  const width = grid[0].length;
+
+  if (height < 1 || width < 1) {
+    throw new RangeError('grid must have a width and height greater than or equal to one');
+  }
+
+  if (typeof row !== 'number' || typeof column !== 'number') {
+    throw new TypeError('row and column must be numbers');
+  }
+
+  if (row < 0 || row >= height || column < 0 || column >= width) {
+    throw new RangeError('row or column is out of bounds');
+  }
+
+  if (grid[row][column] === 1) {
+    return 'kaboom';
+  }
+
+  let adjacentBombs = 0;
+  const directions = [
+    [-1, -1], [-1, 0], [-1, 1],
+    [0, -1],           [0, 1],
+    [1, -1], [1, 0], [1, 1]
+  ];
+
+  for (const [dx, dy] of directions) {
+    const newRow = row + dx;
+    const newColumn = column + dy;
+
+    if (newRow >= 0 && newRow < height && newColumn >= 0 && newColumn < width) {
+      adjacentBombs += grid[newRow][newColumn];
+    }
+  }
+
+  return adjacentBombs;
+}
+
+
 // Begin of tests
 const assert = require("assert");
 

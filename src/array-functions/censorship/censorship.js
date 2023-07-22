@@ -28,6 +28,26 @@ Don't mutate the parameter.
 
 // TODO add your code here
 
+function censor(sentences, forbiddenWord) {
+  if(forbiddenWord){
+    return sentences.map((sentence) => {
+      const words = sentence.split(' ');
+  
+      const censoredWords = words.map((word) => {
+        if (word && word.toLowerCase() === forbiddenWord.toLowerCase()) {
+          return '*'.repeat(word.length);
+        } else {
+          return word;
+        }
+      });
+  
+      return censoredWords.join(' ');
+    });
+  } else {
+    return sentences
+  }
+}
+
 // Begin of tests
 const assert = require("assert");
 

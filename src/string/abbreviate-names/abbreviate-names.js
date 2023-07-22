@@ -14,4 +14,16 @@ Add you own tests.
 
 // TODO add your code here
 
+function abbreviate(name) {
+    if (name === null || typeof name !== 'string') {
+      return '';
+    }
+  
+    const words = name.split(' ');
+    const initials = words.map((word) => word.charAt(0).toUpperCase());
+  
+    return initials.join('.');
+  }
+
+
 module.exports = abbreviate;

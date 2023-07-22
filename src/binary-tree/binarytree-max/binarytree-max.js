@@ -21,8 +21,19 @@ This function must be recursive: you can't use a loop.
 
 */
 
+// class TreeNode {
+//   constructor(value, left, right) {
+//     this.value = value;
+//     this.left = left;
+//     this.right = right;
+//   }
+// }
+
+// const max = (node) => {
+//   // TODO add your code here
+// };
 class TreeNode {
-  constructor(value, left, right) {
+  constructor(value, left = null, right = null) {
     this.value = value;
     this.left = left;
     this.right = right;
@@ -30,7 +41,22 @@ class TreeNode {
 }
 
 const max = (node) => {
-  // TODO add your code here
+  if (node === null) {
+    return null;
+  }
+
+  const leftMax = max(node.left);
+  const rightMax = max(node.right);
+
+  let maxValue = node.value;
+  if (leftMax !== null && leftMax > maxValue) {
+    maxValue = leftMax;
+  }
+  if (rightMax !== null && rightMax > maxValue) {
+    maxValue = rightMax;
+  }
+
+  return maxValue;
 };
 
 // Begin of tests

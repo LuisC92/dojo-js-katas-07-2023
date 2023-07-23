@@ -9,6 +9,18 @@ This function must be recursive: you can't use a loop.
 
 // TODO add your code here
 
+// Create a function `multiply`, which multiply two numbers (positive or negative), using recursion.
+const multiply = (number1, number2) => {
+
+  if (number2 === 0) return 0;
+  
+  if (number2 > 0) return number1 + multiply(number1, number2 - 1);
+  
+  if (number2 < 0) return -multiply(number1, -number2);
+
+}
+
+
 // Begin of tests
 const assert = require("assert");
 

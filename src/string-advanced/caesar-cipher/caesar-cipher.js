@@ -20,13 +20,9 @@ Add you own tests.
 // TODO add your code here
 
 const cipher = (word, shift) => {
-  if (typeof word !== "string" || shift === null || typeof shift !== "number") {
-    throw new TypeError("Both word and shift must be valid inputs.");
-  }
+  if (typeof word !== "string" || shift === null || typeof shift !== "number") throw new TypeError("Both word and shift must be valid inputs.");
 
-  if (word === "") {
-    return "";
-  }
+  if (word === "") return ""
 
   const alphabet = "abcdefghijklmnopqrstuvwxyz";
   const length = alphabet.length;
@@ -34,13 +30,14 @@ const cipher = (word, shift) => {
   return word
     .split("")
     .map((char) => {
-      if (!char.match(/[a-z]/)) {
-        return char;
-      }
+
+      if (!char.match(/[a-z]/)) return char;
 
       const index = (alphabet.indexOf(char) + shift + length) % length;
+
       return alphabet[index];
     })
+
     .join("");
 };
 
@@ -62,7 +59,7 @@ try {
 
   assert.throws(() => cipher(null, 1), TypeError);
   assert.throws(() => cipher("test", "abc"), TypeError);
-  
+
   console.log("All tests passed!");
 } catch (error) {
   console.error("Test failed:", error.message);

@@ -22,6 +22,24 @@ Add you own tests.
 
 // TODO add your code here
 
+const fibo = (number) => {
+  if (number === 0) return 0;
+
+  if (number === 1) return 1;
+
+  return fibo(number - 1) + fibo(number - 2);
+}
+  //!another way
+// const fibo = (number, memo = {}) => {
+
+  //   if (number in memo) return memo[number];
+
+  //   if (number === 0) return 0;
+  //   if (number === 1) return 1;
+
+  //  return fibo(number - 1, memo) + fibo(number - 2, memo);
+// };
+
 // Begin of tests
 const assert = require("assert");
 
@@ -39,5 +57,17 @@ assert.strictEqual(
   "fibo must be recursive"
 );
 // TODO add your tests:
+assert.strictEqual(fibo(0), 0);
+assert.strictEqual(fibo(1), 1);
+assert.strictEqual(fibo(2), 1);
+assert.strictEqual(fibo(3), 2);
+assert.strictEqual(fibo(4), 3);
+assert.strictEqual(fibo(5), 5);
+assert.strictEqual(fibo(6), 8);
+assert.strictEqual(fibo(7), 13);
+assert.strictEqual(fibo(8), 21);
+assert.strictEqual(fibo(9), 34);
+
+console.log("All tests passed!");
 
 // End of tests

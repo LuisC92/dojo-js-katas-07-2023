@@ -17,6 +17,13 @@ Add you own tests.
 
 // TODO add your code here
 
+const pow = (n,e) => {
+  if (e === 0) return 1;
+  return n * pow(n, e - 1);
+}
+
+
+
 // Begin of tests
 const assert = require("assert");
 
@@ -39,5 +46,13 @@ assert.strictEqual(
   "pow must be recursive"
 );
 // TODO add your tests:
+assert.strictEqual(pow(2, 0), 1);
+assert.strictEqual(pow(2, 1), 2);
+assert.strictEqual(pow(2, 2), 4);
+assert.strictEqual(pow(2, 3), 8);
+assert.strictEqual(pow(2, 4), 16);
+assert.strictEqual(pow(2, 5), 32);
+assert.strictEqual(pow(3, 4), 81);
 
+console.log('All tests passed!');
 // End of tests

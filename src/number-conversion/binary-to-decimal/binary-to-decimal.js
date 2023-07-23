@@ -26,6 +26,21 @@ Bonus:
 
 // TODO add your code here
 
+const convert = (binaryString) => {
+  if (typeof binaryString !== 'string') throw new TypeError('Illegal argument');
+  
+
+  if (!/^[01]+$/.test(binaryString))throw new Error('Illegal binary string');
+
+  let decimalValue = 0;
+  
+  for (let i = 0; i < binaryString.length; i++) {
+    decimalValue = decimalValue * 2 + Number(binaryString[i]);
+  }
+
+  return decimalValue;
+};
+
 // Begin of tests
 const assert = require("assert");
 
@@ -37,9 +52,27 @@ assert.strictEqual(
   "don't use parseInt()"
 );
 // TODO add your tests:
+// Valid binary strings
+assert.strictEqual(convert("0"), 0);
+assert.strictEqual(convert("1"), 1);
+assert.strictEqual(convert("10"), 2);
+assert.strictEqual(convert("11"), 3);
+assert.strictEqual(convert("100"), 4);
+assert.strictEqual(convert("101"), 5);
+assert.strictEqual(convert("110"), 6);
+assert.strictEqual(convert("111"), 7);
+assert.strictEqual(convert("1000"), 8);
+assert.strictEqual(convert("1001"), 9);
 
+// Invalid binary strings
+assert.throws(() => convert(), { name: 'TypeError', message: 'Illegal argument' });
+assert.throws(() => convert(123), { name: 'TypeError', message: 'Illegal argument' });
+assert.throws(() => convert("0102"), { name: 'Error', message: 'Illegal binary string' });
+assert.throws(() => convert(""), { name: 'Error', message: 'Illegal binary string' });
+
+console.log('All tests passed!');
 // Bonus: exceptions
-/*
+
 assert.throws(() => {
   convert(1);
 }, /^TypeError: Illegal argument$/);
@@ -49,5 +82,5 @@ assert.throws(() => {
 assert.throws(() => {
   convert("01A1");
 }, /^Error: Illegal binary string$/);
-*/
+
 // End of tests
